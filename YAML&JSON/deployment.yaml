@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server  # Name of the deployment
+  namespace: test
+  labels:
+    app: backend       # Labels to identify the app
+spec:
+  replicas: 3          # Number of replicas (3 pods)
+  selector:
+    matchLabels:
+      app: backend     # Selector to match the labels of the pods
+  template:
+    metadata:
+      labels:
+        app: backend   # Labels applied to the pods
+    spec:
+      containers:
+      - name: my-container
+        image: mobarak9239/server:2.0.0  # Image to use for the container
+        ports:
+        - containerPort: 8080            # Port exposed by the container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: test
+spec:
+  selector:
+    app: backend          # Matches the labels of the pods
+  ports:
+    - protocol: TCP
+      port: 8080          # Port exposed by the service
+      targetPort: 8080    # Port on the container
+      nodePort: 30001     # NodePort to expose on each node in the cluster (must be in range 30000-32767)
+  type: NodePort         # Exposes the service on a static port across all nodes
+

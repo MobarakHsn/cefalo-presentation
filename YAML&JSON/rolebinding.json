@@ -1,0 +1,20 @@
+{
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": {
+      "name": "mobarak-binding",
+      "namespace": "test"
+    },
+    "subjects": [
+      {
+        "kind": "User",
+        "name": "Mobarak",
+        "apiGroup": "rbac.authorization.k8s.io"
+      }
+    ],
+    "roleRef": {
+      "kind": "Role",
+      "name": "mobarak-role",
+      "apiGroup": "rbac.authorization.k8s.io"
+    }
+  }

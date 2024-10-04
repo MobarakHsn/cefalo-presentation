@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+  labels:
+    app: server
+spec:
+  containers:
+  - name: random
+    image: mobarak9239/server:2.0.0
+    ports:
+    - containerPort: 8080  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  selector:
+    app: server               # Matches the label of the Pod
+  ports:
+    - protocol: TCP
+      port: 8080                 # Port for external access
+      targetPort: 8080           # Port on the Pod

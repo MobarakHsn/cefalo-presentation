@@ -1,0 +1,39 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "server",
+      "namespace": "test",
+      "labels": {
+        "app": "backend"
+      }
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "backend"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "backend"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "my-container",
+              "image": "mobarak9239/server:2.0.0",
+              "ports": [
+                {
+                  "containerPort": 8080
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
